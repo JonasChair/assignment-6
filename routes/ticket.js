@@ -3,11 +3,13 @@ import {
     ADD_TICKET,
     BUY_TICKET
 } from "../controllers/ticket.js"
+import validation from "../middlewares/validation.js";
+import { ticketAddSchema } from "../validation/ticketSchema.js"
 import { authenticateUser } from "../middlewares/auth.js";
 
 const router = express.Router();
 
-router.post("/add", authenticateUser, ADD_TICKET);
+router.post("/add", validation(ticketAddSchema), authenticateUser, ADD_TICKET);
 router.put("/buy/:id", authenticateUser, BUY_TICKET);
 
 export default router;
