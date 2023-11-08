@@ -59,4 +59,14 @@ const userLoginSchema = Joi.object({
         }),
 });
 
-export { userRegistrationSchema, userLoginSchema };
+const userTokenRenewSchema = Joi.object({
+    email: Joi.string()
+        .email()
+        .required()
+        .messages({
+            'string.email': `email should be a valid email`,
+            'any.required': `email is a required field`
+        }),
+});
+
+export { userRegistrationSchema, userLoginSchema, userTokenRenewSchema };
